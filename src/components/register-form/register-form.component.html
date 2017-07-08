@@ -1,0 +1,15 @@
+<ion-card >
+  <ion-card-content>
+    <ion-item>
+      <ion-label>Email</ion-label>
+      <ion-input [(ngModel)]="account.email" type="email"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Password</ion-label>
+      <ion-input [(ngModel)]="account.password" type="password"></ion-input>
+    </ion-item>
+  </ion-card-content>
+  <ion-row class="register-form__buttons">
+    <button ion-button (click)="register()">register</button>
+  </ion-row>
+</ion-card>

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {UserProfile} from "../../models/user-profile/user.interface";
 
 @IonicPage()
 @Component({
@@ -8,7 +9,10 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class EditProfilePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  profile = {} as UserProfile;
+
+  constructor(private navCtrl: NavController, private navParams: NavParams) {
+    this.profile = this.navParams.get('existingProfile');
   }
   saveResult(event: Boolean){
     event ? this.navCtrl.setRoot('TabsPage') : console.log('not authenticated or saved');

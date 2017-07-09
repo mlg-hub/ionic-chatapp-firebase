@@ -14,5 +14,9 @@
 
 
 <ion-content padding>
-  <edit-profile-form-component (saveProfileResult) = "saveResult($event)"></edit-profile-form-component>
+  <edit-profile-form-component
+          [profile] = "profile"
+          (saveProfileResult) = "saveResult($event)">
+
+  </edit-profile-form-component>
 </ion-content>

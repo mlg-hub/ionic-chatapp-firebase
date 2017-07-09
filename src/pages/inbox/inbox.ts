@@ -14,5 +14,8 @@ export class InboxPage {
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     console.log(this.messageList)
   }
+  navigateToSearchUserPage(){
+    this.navCtrl.push('SearchUserPage');
+  }
 
 }

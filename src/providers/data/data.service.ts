@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {AngularFireDatabase, FirebaseObjectObservable} from 'angularfire2/database';
+import {AngularFireDatabase, FirebaseObjectObservable, FirebaseListObservable} from 'angularfire2/database';
 import {User} from 'firebase/app';
 import {UserProfile} from "../../models/user-profile/user.interface";
 import 'rxjs/add/operator/take';
@@ -7,7 +7,18 @@ import 'rxjs/add/operator/take';
 export class DataServiceProvider {
 
   profileObject: FirebaseObjectObservable<UserProfile>;
+  profileList: FirebaseListObservable<UserProfile>;
   constructor(private _aDatabase: AngularFireDatabase) {}
+
+  searchUser(firstName: string){
+      const query = this._aDatabase.list('/profiles', {
+        query: {
+          orderByChild: 'firstName',
+          equalTo: firstName
+        }
+      });
+      return query.take(1);
+  }
 
   getProfile(user: User){
     this.profileObject = this._aDatabase.object(`/profiles/${user.uid}`, {preserveSnapshot: true});

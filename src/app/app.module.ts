@@ -11,7 +11,7 @@ import {FIREBASE_CONFIG} from "./app.firebase.config";
 import { AuthServiceProvider } from '../providers/auth-service/auth-service';
 import { AngularFireAuthModule} from 'angularfire2/auth';
 import { DataServiceProvider } from '../providers/data/data.service';
-import { ProfileSearchComponent } from '../components/profile-search/profile-search';
+import { ChatServiceProvider } from '../providers/chat/chat.service';
 @NgModule({
   declarations: [
     MyApp,
@@ -33,7 +33,8 @@ import { ProfileSearchComponent } from '../components/profile-search/profile-sea
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthServiceProvider,
-    DataServiceProvider
+    DataServiceProvider,
+    ChatServiceProvider
   ]
 })
 export class AppModule {}

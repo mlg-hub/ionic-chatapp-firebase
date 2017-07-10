@@ -3,12 +3,15 @@ import {AngularFireDatabase, FirebaseObjectObservable, FirebaseListObservable} f
 import {User} from 'firebase/app';
 import {UserProfile} from "../../models/user-profile/user.interface";
 import 'rxjs/add/operator/take';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/mergeMap';
+import {AuthServiceProvider} from "../auth-service/auth-service";
 @Injectable()
 export class DataServiceProvider {
 
   profileObject: FirebaseObjectObservable<UserProfile>;
   profileList: FirebaseListObservable<UserProfile>;
-  constructor(private _aDatabase: AngularFireDatabase) {}
+  constructor(private _aDatabase: AngularFireDatabase, private _aAuth: AuthServiceProvider) {}
 
   searchUser(firstName: string){
       const query = this._aDatabase.list('/profiles', {
@@ -18,6 +21,12 @@ export class DataServiceProvider {
         }
       });
       return query.take(1);
+  }
+  getAuthUserProfile(){
+    return this._aAuth.getAuthenticatedUser()
+        .map(user => user.uid)
+        .mergeMap(authId => this._aDatabase.object(`/profiles/${authId}`))
+        .take(1)
   }
 
   getProfile(user: User){

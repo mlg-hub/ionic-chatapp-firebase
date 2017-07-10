@@ -14,7 +14,7 @@ export class TabsPage {
 
   constructor() {
     this.tabs1Root = 'InboxPage';
-    this.tabs2Root = 'ChannelPage';
+    this.tabs2Root = 'ChannelsPage';
     this.tabs3Root = 'ProfilPage';
   }
 

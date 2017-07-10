@@ -12,6 +12,9 @@ export class AuthServiceProvider {
   getAuthenticatedUser(){
     return this._aAuth.authState;
   }
+  logOutUser(){
+    this._aAuth.auth.signOut();
+  }
 
   async signIn(account: Account){
     try {

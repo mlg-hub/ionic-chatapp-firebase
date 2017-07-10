@@ -1,13 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {IonicPage, NavController, NavParams, LoadingController} from 'ionic-angular';
 import {UserProfile} from "../../models/user-profile/user.interface";
+import {AuthServiceProvider} from "../../providers/auth-service/auth-service";
 
-/**
- * Generated class for the ProfilPage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
 @IonicPage()
 @Component({
   selector: 'page-profil',
@@ -16,7 +11,8 @@ import {UserProfile} from "../../models/user-profile/user.interface";
 export class ProfilPage {
   existingProfile: UserProfile;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+              private _aAuth: AuthServiceProvider, private loading: LoadingController ) {
   }
 
   getExistingProfile(profile: UserProfile){
@@ -24,6 +20,18 @@ export class ProfilPage {
   }
   navigateToEditProfilePage(){
     this.navCtrl.push('EditProfilePage',{existingProfile: this.existingProfile})
+  }
+  logout(){
+    this._aAuth.logOutUser();
+    this.loading.create({
+      content: 'Please wait...',
+      duration: 3000
+    }).present();
+
+    setTimeout(() => {
+      this.navCtrl.setRoot('LoginPage');
+    }, 3000)
+
   }
 
 }

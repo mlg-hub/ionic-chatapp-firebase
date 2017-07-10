@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import {DataServiceProvider} from "../../providers/data/data.service";
 import {UserProfile} from "../../models/user-profile/user.interface";
 
@@ -10,14 +10,20 @@ export class ProfileSearchComponent {
 
   query: string;
   profileList: UserProfile[];
+  @Output() selectedProfile: EventEmitter<UserProfile>;
 
   constructor(private _aData: DataServiceProvider) {
+    this.selectedProfile = new EventEmitter<UserProfile>();
   }
+
   searchUser(){
     console.log(this.query);
     this._aData.searchUser(this.query).subscribe( profiles => {
       this.profileList = profiles;
     })
+  }
+  selectedUser(profile:UserProfile){
+      this.selectedProfile.emit(profile);
   }
 
 

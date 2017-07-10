@@ -13,14 +13,16 @@ export class MyApp {
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
               private _Auth: AuthServiceProvider) {
 
-    this._Auth.getAuthenticatedUser().subscribe( auth =>  {
-      !auth ? this.rootPage = 'LoginPage' : this.rootPage = 'TabsPage';
-    });
+    // this._Auth.getAuthenticatedUser().subscribe( auth =>  {
+    //   !auth ? this.rootPage = 'LoginPage' : this.rootPage = 'TabsPage';
+    // });
     platform.ready().then(() => {
+
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       splashScreen.hide();
+      this.rootPage = 'LoginPage';
     });
   }
 }

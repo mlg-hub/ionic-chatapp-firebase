@@ -1,19 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 
-/**
- * Generated class for the SendmessageboxComponent component.
- *
- * See https://angular.io/docs/ts/latest/api/core/index/ComponentMetadata-class.html
- * for more info on Angular Components.
- */
 @Component({
   selector: 'sendmessagebox-component',
   templateUrl: 'sendmessagebox.component.html'
 })
 export class SendmessageboxComponent {
-  
+  @Output() sendMessage: EventEmitter<string>;
+  content:string;
   constructor() {
-
+    this.sendMessage = new EventEmitter<string>();
+  }
+  onSubmit(){
+    this.sendMessage.emit(this.content);
+    this.content = "";
   }
 
 }

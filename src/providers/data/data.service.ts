@@ -6,6 +6,7 @@ import 'rxjs/add/operator/take';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
 import {AuthServiceProvider} from "../auth-service/auth-service";
+import {database} from 'firebase';
 @Injectable()
 export class DataServiceProvider {
 
@@ -49,6 +50,21 @@ export class DataServiceProvider {
       console.log(e);
       return false;
     }
+  }
+
+  setUserOnline(profile: UserProfile){
+    const ref = database().ref(`online-users/${profile.$key}`);
+    /*this is the ref to the database we use the firebase SDK not angularfire*/
+    try{
+      ref.update({...profile});
+      ref.onDisconnect().remove();
+    }catch (e){
+        console.error(e);
+    }
+  }
+
+  getOnlineUsers(): FirebaseListObservable<UserProfile[]>{
+    return this._aDatabase.list(`online-users`);
   }
 
 }

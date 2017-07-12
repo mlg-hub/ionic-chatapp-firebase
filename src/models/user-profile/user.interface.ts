@@ -4,4 +4,5 @@ export interface UserProfile {
     avatar: string;
     email: string;
     dateOfBirth: Date;
+    $key?: string;
 }

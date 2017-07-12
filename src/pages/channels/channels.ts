@@ -39,5 +39,8 @@ export class ChannelsPage {
       ]
     }).present();
   }
+  channelStartChat(channel){
+    this.navCtrl.push('ChannelChatPage', {channel: channel});
+  }
 
 }

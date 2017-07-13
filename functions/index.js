@@ -19,3 +19,13 @@ exports.addChatUserMessages = functions.database.ref(`/messages/{messageId}`)
         admin.database().ref(`/user-messages/${messageValue.userToId}/${messageValue.userFromId}`)
             .child(messageKey).set(1);
     });
+exports.genarateLastMessage = functions.database.ref(`/messages/{messageId}`)
+    .onWrite(event => {
+        const messageKey = event.data.key;
+        const messageValue = event.data.val();
+
+        admin.database().ref(`/last-messages/${messageValue.userFromId}/${messageValue.userToId}`)
+            .child('key').set(messageKey);
+            admin.database().ref(`/last-messages/${messageValue.userToId}/${messageValue.userFromId}`)
+            .child('key').set(messageKey);
+    })

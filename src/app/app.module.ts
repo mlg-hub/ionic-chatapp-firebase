@@ -12,10 +12,11 @@ import { AuthServiceProvider } from '../providers/auth-service/auth-service';
 import { AngularFireAuthModule} from 'angularfire2/auth';
 import { DataServiceProvider } from '../providers/data/data.service';
 import { ChatServiceProvider } from '../providers/chat/chat.service';
-import { OnlineUsersComponent } from '../components/online-users/online-users';
+
 @NgModule({
   declarations: [
     MyApp,
+    
   ],
   imports: [
     BrowserModule,

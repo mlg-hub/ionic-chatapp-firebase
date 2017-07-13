@@ -12,6 +12,7 @@ export class AuthServiceProvider {
   getAuthenticatedUser(){
     return this._aAuth.authState;
   }
+  
   logOutUser(){
     this._aAuth.auth.signOut();
   }

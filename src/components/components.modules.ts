@@ -9,6 +9,7 @@ import {SendmessageboxComponent} from "./sendmessagebox/sendmessagebox.component
 import {ChatMessageComponent} from "./chat-message/chat-message.component";
 import {ChannelListComponent} from "./channel-list/channel-list";
 import {OnlineUsersComponent} from "./online-users/online-users";
+import { LastMessageListComponent } from "./last-message-list/last-message-list";
 
 @NgModule({
     declarations: [
@@ -20,7 +21,8 @@ import {OnlineUsersComponent} from "./online-users/online-users";
         SendmessageboxComponent,
         ChatMessageComponent,
         ChannelListComponent,
-        OnlineUsersComponent
+        OnlineUsersComponent,
+        LastMessageListComponent
     ],
     imports: [IonicModule],
     exports: [ LoginFormComponent, 
@@ -31,7 +33,8 @@ import {OnlineUsersComponent} from "./online-users/online-users";
         SendmessageboxComponent,
         ChatMessageComponent,
         ChannelListComponent,
-        OnlineUsersComponent]
+        OnlineUsersComponent,
+     LastMessageListComponent]
 })
 
 export class ComponentsModule{

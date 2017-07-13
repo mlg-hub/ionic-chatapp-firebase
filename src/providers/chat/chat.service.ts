@@ -20,7 +20,7 @@ export class ChatServiceProvider {
   addChannel(channelName: string){
     this._aDatabase.list(`channels-name`).push({name: channelName});
   }
-  getChannelListReference(): FirebaseListObservable<Channel>{
+  getChannelListReference(){
     return this._aDatabase.list(`channels-name`);
   }
   getChannelChatRef(channelKey: string){
@@ -47,5 +47,23 @@ export class ChatServiceProvider {
           )
         })
   }
+
+  getLastMessagesForUser(): Observable<Message[]>{
+      return this._aAuth.getAuthenticatedUser()
+        .map(auth => auth.uid)
+          .mergeMap(authId => this._aDatabase.list(`/last-messages/${authId}`))
+          .mergeMap(messageIds => {
+            return Observable.forkJoin(
+              messageIds.map(message => {
+                return this._aDatabase.object(`/messages/${message.key}`).first();
+              }),
+              (...values) => {
+                console.log(values);
+                return values
+              }
+            )
+          })
+  }
+
 }
 

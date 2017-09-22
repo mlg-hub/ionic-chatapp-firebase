@@ -38,13 +38,14 @@ export class ChatServiceProvider {
         .map(auth => auth.uid)
         .mergeMap(uid => this._aDatabase.list(`/user-messages/${uid}/${userToId}`))
         .mergeMap(chats => {
-          return Observable.forkJoin(
+          return Observable
+          .forkJoin(
               chats.map(chat => this._aDatabase.object(`/messages/${chat.$key}`)
-                  .first()),
-              (...vals: Message[]) => {
-                  return vals;
-              }
-          )
+                  .first()),(...vals: Message[]) => {
+                                return vals;
+                            }
+                            
+                    )
         })
   }
 

@@ -12,8 +12,8 @@ export class RegisterPage {
   constructor(private navCtrl: NavController, private loading: LoadingController,
               private toast: ToastController) {
   }
-
   register(event: LoginResponse){
+    
     const loading = this.loading.create({
       content: "Please wait..."
     });

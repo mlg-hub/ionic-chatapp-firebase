@@ -13,6 +13,7 @@ log.txt
 npm-debug.log*
 
 .idea/
+src/app/app.firebase.config.ts
 .sass-cache/
 .tmp/
 .versions/
